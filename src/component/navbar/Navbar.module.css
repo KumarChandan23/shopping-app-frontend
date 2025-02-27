@@ -1,0 +1,22 @@
+#navbar_container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0 20px;
+  background-color: royalblue;
+  color: white;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  height: 60px;
+}
+#navbar_container ul{
+    display: flex;
+    gap:20px;
+    text-transform: capitalize;
+    font-size: 20px;
+}
+
+#navbar_container .active{
+    color:bisque;
+    text-decoration: underline 2px solid bisque;
+    text-underline-offset: 5px;
+}
