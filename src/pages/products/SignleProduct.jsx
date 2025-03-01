@@ -45,9 +45,7 @@ const SingleProduct = () => {
                         {/* Right Side: Product Info */}
                         <Grid item xs={12} md={6}>
                             <CardContent>
-                                <Typography variant="h6" color="info.main" gutterBottom>
-                                    Brand: {product.brand} | Model: {product.model}
-                                </Typography>
+                               
                                 <Typography
                                     variant="h4"
                                     gutterBottom
@@ -55,7 +53,9 @@ const SingleProduct = () => {
                                 >
                                     {product.title}
                                 </Typography>
-
+                                <Typography variant="h6" color="info.main" gutterBottom>
+                                    Brand: {product.brand} | Model: {product.model}
+                                </Typography>
                                 <Box sx={{ display: "flex", gap: 1, alignItems: "center" }}>
                                     <Typography
                                         variant="h5"

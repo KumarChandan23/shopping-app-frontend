@@ -25,7 +25,7 @@ const Products = () => {
         const response = await axios.get(
           category
             ? `https://fakestoreapi.in/api/products/category?type=${category}`
-            : "https://fakestoreapi.in/api/products"
+            : "https://fakestoreapi.in/api/products?page=3"
         );
         setProducts(response.data.products || []);
       } catch (error) {
