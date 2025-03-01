@@ -4,6 +4,7 @@ import React from 'react';
 import { TextField, Button, Container, Typography, Box, CssBaseline } from '@mui/material';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
 import { NavLink } from 'react-router-dom';
+import axios from 'axios';
 
 const theme = createTheme();
 
@@ -17,12 +18,24 @@ const validationSchema = Yup.object({
   password: Yup.string().min(6, 'Password must be at least 6 characters').required('Required')
 });
 
-const onSubmit = (values, { setSubmitting, resetForm }) => {
-  setTimeout(() => {
-    console.log(JSON.stringify(values, null, 2));
+const onSubmit = async (values, { setSubmitting, resetForm }) => {
+  try {
+    const {data} = await axios.get('http://localhost:8000/users');
+
+    const response = data.find(user => user.email === values.email && user.password === values.password);
+    if(!response) {
+      alert('Invalid email or password');
+      return;
+    }
+
+    localStorage.setItem("userid", response.id);
+    console.log(response);
+    console.log(values)
     setSubmitting(false);
     resetForm();
-  }, 400);
+  } catch (error) {
+    console.error(error);
+  }
 };
 
 const Login = () => {
@@ -32,7 +45,7 @@ const Login = () => {
         <CssBaseline />
         <Box
           sx={{
-            marginTop: 8,
+            marginTop: 2,
             display: 'flex',
             flexDirection: 'column',
             alignItems: 'center',

@@ -4,6 +4,8 @@ import Signup from "../pages/Form/signup/Signup";
 import Layout from "../layout/Layout";
 import Login from "../pages/Form/login/Login";
 import Update from "../pages/Form/update/Update";
+import SingleProduct from "../pages/products/SignleProduct";
+import Products from "../pages/products/Products";
 
 
 export const myRoutes = createBrowserRouter([
@@ -26,6 +28,18 @@ export const myRoutes = createBrowserRouter([
             {
                 path:"update",
                 element: <Update />
+            },
+            {
+                path: "products",
+                element: <Products /> 
+            },
+            {
+                path: "products/:category",
+                element: <Products /> 
+            },
+            {
+                path: "product/:productId",
+                element: <SingleProduct />
             }
 
         ]

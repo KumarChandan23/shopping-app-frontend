@@ -3,6 +3,7 @@ import { Formik, Form } from "formik";
 import * as Yup from "yup";
 import { TextField, Button, Typography, Box } from "@mui/material";
 import { NavLink } from "react-router-dom";
+import axios from "axios";
 
 const Signup = () => {
   const initialValues = {
@@ -21,12 +22,15 @@ const Signup = () => {
       .required("Required"),
   });
 
-  const onSubmit = (values, { setSubmitting, resetForm }) => {
-   setTimeout(() => {
-    console.log(values);
-    resetForm();
-    setSubmitting(false);
-   }, 5000);
+  const onSubmit = async (values, { setSubmitting, resetForm }) => {
+        try {
+          await axios.post("http://localhost:8000/users", values);
+          console.log("User Registerd Successfully....");
+          setSubmitting(false);
+          resetForm();
+        } catch (error) {
+          console.error(error);
+        }
   };
 
   return (
