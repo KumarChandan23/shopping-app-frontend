@@ -1,7 +1,9 @@
-import React from "react";
+import React, { useContext } from "react";
 import { Card, CardActionArea, CardMedia, CardContent, Typography } from "@mui/material";
 
 const CategoryCard = ({ image, title, onClick }) => {
+
+
   return (
     <Card sx={{ maxWidth: 350, mx: "auto", boxShadow: 3, borderRadius: 2 }}>
       <CardActionArea onClick={onClick}>

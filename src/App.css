@@ -15,3 +15,11 @@ a{
 ul{
   list-style: none;
 }
+
+@media (max-width: 426px) {
+  .toastContainer {
+    width: 300px;
+    margin-inline-start: 12%;
+    margin-top: 13%;
+  }
+}

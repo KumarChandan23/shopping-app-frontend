@@ -1,11 +1,14 @@
-import React from "react";
+import React, { useState } from "react";
 import { Formik, Form } from "formik";
 import * as Yup from "yup";
 import { TextField, Button, Typography, Box } from "@mui/material";
 import { NavLink } from "react-router-dom";
 import axios from "axios";
+import Captcha from "../../../component/captcha/Captcha";
 
 const Signup = () => {
+
+  const [isValidated, setIsValidated] = useState(false);
   const initialValues = {
     username: "",
     email: "",
@@ -24,7 +27,8 @@ const Signup = () => {
 
   const onSubmit = async (values, { setSubmitting, resetForm }) => {
         try {
-          await axios.post("http://localhost:8000/users", values);
+          const {confirmPassword, ...userData} = values;
+          await axios.post("http://localhost:8000/users", userData);
           console.log("User Registerd Successfully....");
           setSubmitting(false);
           resetForm();
@@ -102,12 +106,13 @@ const Signup = () => {
                 helperText={touched.confirmPassword && errors.confirmPassword}
               />
             </Box>
+            <Captcha onValidate={setIsValidated} />
             <Button
               type="submit"
               variant="contained"
               color="primary"
               fullWidth
-              disabled={isSubmitting}
+              disabled={isSubmitting || !isValidated}
             >
               {isSubmitting ? "Submitting..." : "Signup"}
             </Button>

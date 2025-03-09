@@ -5,7 +5,9 @@ import Layout from "../layout/Layout";
 import Login from "../pages/Form/login/Login";
 import Update from "../pages/Form/update/Update";
 import SingleProduct from "../pages/products/SignleProduct";
-import Products from "../pages/products/Products";
+import Products from "../pages/products/AllProducts";
+import Cart from "../component/cart/Cart";
+import CategoryProducts from "../pages/products/CategoryProducts";
 
 
 export const myRoutes = createBrowserRouter([
@@ -34,12 +36,16 @@ export const myRoutes = createBrowserRouter([
                 element: <Products /> 
             },
             {
-                path: "products/:category",
-                element: <Products /> 
+                path: "products/category/:category",
+                element: <CategoryProducts /> 
             },
             {
                 path: "product/:productId",
                 element: <SingleProduct />
+            },
+            {
+                path: "/cart",
+                element: <Cart />
             }
 
         ]
