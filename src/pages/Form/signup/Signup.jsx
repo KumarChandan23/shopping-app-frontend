@@ -5,6 +5,7 @@ import { TextField, Button, Typography, Box } from "@mui/material";
 import { NavLink } from "react-router-dom";
 import axios from "axios";
 import Captcha from "../../../component/captcha/Captcha";
+import { toast } from "react-toastify";
 
 const Signup = () => {
 
@@ -26,26 +27,24 @@ const Signup = () => {
   });
 
   const onSubmit = async (values, { setSubmitting, resetForm }) => {
-        try {
-          const {confirmPassword, ...userData} = values;
-          await axios.post("http://localhost:8000/users", userData);
-          console.log("User Registerd Successfully....");
-          setSubmitting(false);
-          resetForm();
-        } catch (error) {
-          console.error(error);
-        }
+    try {
+      const { confirmPassword, ...userData } = values;
+      await axios.post("http://localhost:9000/api/v1/users/register", JSON.stringify(userData), {
+        headers: { "Content-Type": "application/json" }
+      });
+      toast.success("User Registerd Successfully....");
+      setSubmitting(false);
+      resetForm();
+    } catch (error) {
+      toast.error("Error Occured while Registering new user", error);
+    }
   };
 
   return (
     <Formik initialValues={initialValues} validationSchema={validationSchema} onSubmit={onSubmit}>
       {({ isSubmitting, handleChange, handleBlur, values, errors, touched }) => (
         <Box
-          sx={{
-            maxWidth: "400px",
-            mx: "auto",
-            mt: 2,
-            p: 3,
+          sx={{ maxWidth: "400px",mx: "auto",mt: 2,p: 3,
             boxShadow: 3,
             borderRadius: 2,
             backgroundColor: "white",
@@ -119,10 +118,10 @@ const Signup = () => {
           </Form>
           <Box sx={{ mt: 2, textAlign: "center" }}>
             <Typography variant="body2">
-              Already have an account? 
-              <NavLink to="/login" style={{ color: "royalblue"}}> Login</NavLink>
+              Already have an account?
+              <NavLink to="/login" style={{ color: "royalblue" }}> Login</NavLink>
             </Typography>
-        </Box>  
+          </Box>
         </Box>
       )}
     </Formik>
